@@ -10,7 +10,7 @@ directory = '/home/pi/newtest/all/'
 if not os.path.exists(directory):
         os.makedirs(directory)
 text_file = open(directory + str(int(time.time())) + '.txt','w')
-header="{0},{1},{2},{3},{4},{5},{6},{7}\n".format('UTC','Pressure','Temperature','Lux','IR spectrum','x','y','z')
+header="{0},{1},{2},{3},{4},{5},{6},{7}\n".format('UTC','Pressure','Temperature','Lux','IR spectrum','ax','ay','az')
 print header
 text_file.write(header)
 
@@ -32,25 +32,14 @@ while True:
 		X=(ac['x'])
 		Y=(ac['y'])
 		Z=(ac['z'])
-		#print ac
+		#gyro=mpu.get_gyro_data()
+		#X=(gyro['x'])
+                #Y=(gyro['y'])
+                #Z=(gyro['z'])
 		pressure="{0},{1},{2},{3},{4},{5},{6},{7}\n".format(str(time.time()),str(sensor.pressure()),str(sensor.temperature()),str(lux),str(ir),str(X),str(Y),str(Z))
-		#light= "{0},{1},{2},{3},{4},{5}\n".format(str(time.time()),str(lux),str(full),str(ir),str(sensor.pressure(),str(sensor.temperature()))
 		time.sleep(1)
 		print pressure
                 text_file.write(pressure)
-
-
-   # accel_data = mpu.get_accel_data()
-   # print(accel_data['x'])
-   # print(accel_data['y'])
-   # print(accel_data['z'])
-  #  gyro_data = mpu.get_gyro_data()
-  #  print(gyro_data['x'])
-  #  print(gyro_data['y'])
-#    print(gyro_data['z'])
-
-
-
 
         except Exception as e:
                 print e
