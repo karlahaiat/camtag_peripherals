@@ -1,0 +1,1 @@
+UTC,Pressure,Temperature,Lux,IR spectrum,x,y,z
