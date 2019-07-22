@@ -1,5 +1,4 @@
-#Script will turn on raspberry pi peripherals when button on GPIO 26 is pressed
-
+#!/usr/bin/env python
 import RPi.GPIO as GPIO
 import os
 import time

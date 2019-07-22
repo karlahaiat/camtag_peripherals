@@ -5,8 +5,10 @@ import os
 from read_tsl import Tsl2591
 from mpu6050 import mpu6050
 
+debug=True
+
 #Save data in data/pressure
-directory = '/home/pi/newtest/tag_data/all/'
+directory = '/home/pi/newtest/tag_data/sensors/'
 if not os.path.exists(directory):
         os.makedirs(directory)
 text_file = open(directory + str(int(time.time())) + '.txt','w')
@@ -36,10 +38,13 @@ while True:
 		#X=(gyro['x'])
                 #Y=(gyro['y'])
                 #Z=(gyro['z'])
-		pressure="{0},{1},{2},{3},{4},{5},{6},{7}\n".format(str(time.time()),str(sensor.pressure()),str(sensor.temperature()),str(lux),str(ir),str(X),str(Y),str(Z))
+		sensors="{0},{1},{2},{3},{4},{5},{6},{7}\n".format(str(time.time()),str(sensor.pressure()),str(sensor.temperature()),str(lux),str(ir),str(X),str(Y),str(Z))
 		time.sleep(1)
-		print pressure
-                text_file.write(pressure)
+		text_file.write(sensors)
+		if lux > 1000:
+			os.system("sudo shutdown now")
+		if debug:
+			print sensors
 
         except Exception as e:
                 print e

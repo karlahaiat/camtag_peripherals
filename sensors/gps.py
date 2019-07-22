@@ -5,6 +5,8 @@ import serial
 import threading
 import time
 
+debug=True
+
 def gps():
         ser=serial.Serial(COMPORT,BAUDRATE,timeout=0)
 	header="{0},{1},{2},{3},{4}\n".format('Date','GMT Time','UTC','North','West')
@@ -14,7 +16,7 @@ def gps():
         	os.makedirs(directory)
 	text_file = open(directory + str(int(time.time())) + '.txt','w')
 	text_file.write(header)
-	#text_file.write(header)
+	#text_file.write(header1)
 
         while True:
         	line=ser.readline()
@@ -35,8 +37,9 @@ def gps():
                         north = data[3]
                         west = data[5]
 			gps="{0},{1},{2},{3},{4}\n".format(str(date),str(t),str(time.time()),str(north),str(west))
-                        print gps
 			text_file.write(gps)
+			if debug:
+				print gps
 
 
 COMPORT='/dev/serial0'
